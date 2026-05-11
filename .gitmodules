@@ -1,0 +1,3 @@
+[submodule "related_work/equivariance2inverse"]
+	path = related_work/equivariance2inverse
+	url = https://github.com/D1rk123/equivariance2inverse.git
