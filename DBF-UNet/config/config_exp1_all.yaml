@@ -1,0 +1,55 @@
+# -------- Data --------
+data:
+  # 三个数据集分别的根路径
+  train_dir: "/ibex/user/liuj0s/CS_300/cache/data/260503-noBH_W_TV_ds6_mode3_noisy_iter100_rec2048/Train"
+  val_dir:   "/ibex/user/liuj0s/CS_300/cache/data/260503-noBH_W_TV_ds6_mode3_noisy_iter100_rec2048/Val"
+  test_dir:  "/ibex/user/liuj0s/CS_300/cache/data/260503-noBH_W_TV_ds6_mode3_noisy_iter100_rec2048/Test"
+
+  agd_subdir: "agd_recon"                 # AGD 重建图子目录
+  gt_subdir: "gt"                         # GT 图子目录
+  file_prefix: "slice"                    # 文件前缀 (slice00001.npy)
+  index_digits: 5                         # index 位数
+  image_size: 1024
+
+  # 归一化统计量
+  normalize_mode: "per_sample"            # per_sample / global
+  global_gt_max: 0.014
+  global_agd_max: 0.036
+
+# -------- Model --------
+model:
+  base_channels: 32                       # U-Net base channel,64 → 25M 参数
+  num_levels: 5                           # encoder levels
+  freq_channels: 32                       # 频域分支通道
+  freq_blocks: 3                          # 频域 Fourier block 数
+  use_freq_branch: true                   # 是否启用频域分支
+  dropout: 0.0
+
+# -------- Training --------
+train:
+  batch_size: 8
+  num_workers: 4
+  epochs: 100
+  lr: 1.0e-5
+  weight_decay: 0.5e-5
+  lr_min: 1.0e-6
+  warmup_epochs: 5
+  grad_clip: 1.0
+  use_amp: true
+  use_compile: false
+  seed: 42
+
+# -------- Loss weights --------
+loss:
+  w_l1: 1.0
+  w_ssim: 0.1
+  w_fft: 0.05
+
+# -------- Logging --------
+log:
+  log_dir: "/ibex/user/liuj0s/CS_300/cache/logs"
+  ckpt_dir: "/ibex/user/liuj0s/CS_300/cache/checkpoint/All_260503-noBH_W_TV_ds6_mode3_noisy_iter100_rec2048"
+  save_every: 5                           # 每 N epoch 保存
+  val_every: 1                            # 每 N epoch 验证
+  log_every: 10                           # 每 N iter 打印
+  visualize_every: 20                     # 每 N epoch 可视化
