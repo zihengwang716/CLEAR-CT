@@ -1,3 +1,6 @@
 [submodule "related_work/equivariance2inverse"]
 	path = related_work/equivariance2inverse
 	url = https://github.com/D1rk123/equivariance2inverse.git
+[submodule "related_work/LION"]
+	path = related_work/LION
+	url = https://github.com/CambridgeCIA/LION.git
